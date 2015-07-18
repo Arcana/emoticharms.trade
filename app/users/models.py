@@ -32,7 +32,6 @@ class User(db.Model):
     last_seen = db.Column(db.DateTime, default=datetime.datetime.utcnow, nullable=False)
     next_steam_check = db.Column(db.DateTime, default=datetime.datetime.utcnow() + datetime.timedelta(hours=4))
     user_class = db.Column(db.Integer, default=0)
-    upload_credits = db.Column(db.Integer, default=0)
     signed_in = db.Column(db.Boolean, default=True)
     enabled = db.Column(db.Boolean, default=True)
 
@@ -65,9 +64,6 @@ class User(db.Model):
 
     def is_admin(self):
         return True if self.user_class > 1 else False
-
-    def is_uploader(self):
-        return True if self.upload_credits > 0 or self.upload_credits == -1 or self.is_admin() else False
 
     def update_last_seen(self):
         now = datetime.datetime.utcnow()
