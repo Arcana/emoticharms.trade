@@ -59,6 +59,7 @@ target/
 #PyCharm
 .idea/
 
-instance/
+instance/*
+!instance/settings_example.py
 
 alembic.ini

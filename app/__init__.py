@@ -25,7 +25,7 @@ steam.api.socket_timeout.set(5)
 # Views
 import views
 
-#Blueprints
+# Blueprints
 from .users.views import users as users_blueprint
 
 app.register_blueprint(users_blueprint)
