@@ -27,5 +27,7 @@ import views
 
 # Blueprints
 from .users.views import users as users_blueprint
+from .emoticharms.views import emoticharms as emoticharms_blueprint
 
 app.register_blueprint(users_blueprint)
+app.register_blueprint(emoticharms_blueprint)
