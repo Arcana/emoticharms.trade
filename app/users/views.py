@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, redirect, url_for
+from flask import Blueprint, flash, redirect, url_for, render_template
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from app import oid, db, login_manager
 from models import User, AnonymousUser
@@ -58,11 +58,17 @@ def create_or_login(resp):
         return redirect(oid.get_next_url())
 
     login_attempt = login_user(_user, remember=True)
-    if login_attempt is True and new_user and _user.profile_url:
-        flash(u"Welcome to mods.tf, {}!".format(_user.name), "success")
+    if login_attempt is True and new_user and _user.ti5_ticket is True and _user.profile_url:
+        flash(u"Welcome to emoticharms.trade, {}!".format(_user.name), "success")
+    elif login_attempt is True and new_user and _user.ti5_ticket is False and _user.profile_url:
+        flash(u"Welcome to emoticharms.trade, {}! Unfortunately you do not appear to have an International 2015 ticket "
+              u"associated with your Steam account. This site is only available to users with TI5 tickets. "
+              u"If you have a ticket, please associate it with your Steam account "
+              u"and then recheck status from your settings page.".format(_user.name), "warning")
     elif login_attempt is True and new_user and not _user.profile_url:
-        flash(u"Welcome to mods.tf! Unfortunately were unable to fetch your Steam user data."
-              u"We will try again soon. For now you will be represented by your numerical ID, {}.".format(_user.name), "success")
+        flash(u"Welcome to emoticharms.trade! Unfortunately were unable to fetch your Steam user data."
+              u"We will try again soon. For now you will be represented by your numerical ID, {}.".format(_user.name)
+              , "success")
     elif login_attempt is True and not new_user:
         flash(u"Welcome back, {}.".format(_user.name), "success")
     else:
@@ -76,3 +82,9 @@ def logout():
     logout_user()
     flash(u"You are now logged out.")
     return redirect(oid.get_next_url())
+
+
+@users.route('/settings/')
+@login_required
+def settings():
+    return NotImplementedError

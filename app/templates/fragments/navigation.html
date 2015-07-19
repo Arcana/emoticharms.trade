@@ -2,7 +2,7 @@
     <ul>
         <li><a href="{{ url_for('index') }}">Home</a></li>
         {% if current_user.is_authenticated() %}
-            <li><a href="{{ url_for('users.login') }}">Log out ({{ current_user.name }})</a></li>
+            <li><a href="{{ url_for('users.logout') }}">Log out ({{ current_user.name }})</a></li>
             <li>Emoticharms
                 <ul>
                     <li><a href="{{ url_for('emoticharms.index') }}">View matches</a></li>

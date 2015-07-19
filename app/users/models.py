@@ -33,6 +33,7 @@ class User(db.Model):
     next_steam_check = db.Column(db.DateTime, default=datetime.datetime.utcnow() + datetime.timedelta(hours=4))
     user_class = db.Column(db.Integer, default=0)
     signed_in = db.Column(db.Boolean, default=True)
+    ti5_ticket = db.Column(db.Boolean, default=False)
     enabled = db.Column(db.Boolean, default=True)
 
     __mapper_args__ = {
@@ -86,9 +87,16 @@ class User(db.Model):
             self.avatar_small = steam_info.avatar_small
             self.avatar_medium = steam_info.avatar_medium
             self.avatar_large = steam_info.avatar_large
+            self.ti5_ticket = self.check_ti5_ticket_status()
             self.next_steam_check = datetime.datetime.utcnow() + datetime.timedelta(hours=4)
         except (HTTPError, HTTPTimeoutError):
             self.next_steam_check = datetime.datetime.utcnow() + datetime.timedelta(minutes=30)
+
+    def check_ti5_ticket_status(self):  # This API call is secured, so don't try it!
+        status = steam.api.interface("IDOTA2Ticket_570").SteamAccountValidForEvent(EventID=1, SteamID=self.steam_id)\
+            .get("result")
+        print bool(status)
+        return bool(status.get("value"))
 
     @property
     def steam_id(self):
