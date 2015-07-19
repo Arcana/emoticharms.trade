@@ -87,4 +87,4 @@ def logout():
 @users.route('/settings/')
 @login_required
 def settings():
-    return NotImplementedError
+    return render_template('users/settings.html')
