@@ -1,5 +1,6 @@
-from flask import Blueprint, flash, redirect, url_for
-from models import Pack, Charm
+from flask import Blueprint, flash, redirect, url_for, render_template
+from app.emoticharms.models import Pack, Charm
+from app.emoticharms.forms import UserPacksForm
 
 emoticharms = Blueprint("emoticharms", __name__, url_prefix="/emoticharms")
 
@@ -10,6 +11,9 @@ def index():
     charms = Charm.query.all()
     raise NotImplementedError()
 
+
 @emoticharms.route('/manage')
 def manage():
-    raise NotImplementedError()
+    form = UserPacksForm()
+
+    return render_template('emoticharms/manage.html', form=form)

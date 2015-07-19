@@ -23,5 +23,3 @@ class Charm(db.Model):
     pack_id = db.Column(db.Integer, db.ForeignKey("pack.id"))
     name = db.Column(db.String(128))
     hero = db.Column(db.String(128))
-
-

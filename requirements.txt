@@ -4,6 +4,7 @@ Flask-Login==0.2.11
 Flask-OpenID==1.2.4
 Flask-SQLAlchemy==2.0
 Flask-Script==2.0.5
+flask-wtf-0.12
 Jinja2==2.7.3
 Mako==1.0.1
 MarkupSafe==0.23
@@ -17,3 +18,4 @@ itsdangerous==0.24
 python-openid==2.2.5
 steamodd==4.19
 wsgiref==0.1.2
+WTForms-2.0.2
