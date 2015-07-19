@@ -1,0 +1,18 @@
+INSERT INTO emoticharms.charm (id, pack_id, name, hero) VALUES (1, 1, 'cheeky', 'Puck');
+INSERT INTO emoticharms.charm (id, pack_id, name, hero) VALUES (2, 1, 'blush', 'Slark');
+INSERT INTO emoticharms.charm (id, pack_id, name, hero) VALUES (3, 1, 'cool', 'Nature''s Prophet');
+INSERT INTO emoticharms.charm (id, pack_id, name, hero) VALUES (4, 2, 'crazy', 'Timbersaw');
+INSERT INTO emoticharms.charm (id, pack_id, name, hero) VALUES (5, 2, 'disapprove', 'Earth Spirit');
+INSERT INTO emoticharms.charm (id, pack_id, name, hero) VALUES (6, 2, 'cry', 'Undying');
+INSERT INTO emoticharms.charm (id, pack_id, name, hero) VALUES (7, 3, 'facepalm', 'Windranger');
+INSERT INTO emoticharms.charm (id, pack_id, name, hero) VALUES (8, 3, 'happytears', 'Lich');
+INSERT INTO emoticharms.charm (id, pack_id, name, hero) VALUES (9, 3, 'highfive', 'Sniper');
+INSERT INTO emoticharms.charm (id, pack_id, name, hero) VALUES (10, 4, 'huh', 'Invoker');
+INSERT INTO emoticharms.charm (id, pack_id, name, hero) VALUES (11, 4, 'hush', 'Drow Ranger');
+INSERT INTO emoticharms.charm (id, pack_id, name, hero) VALUES (12, 4, 'laugh', 'Anti-Mage');
+INSERT INTO emoticharms.charm (id, pack_id, name, hero) VALUES (13, 5, 'rage', 'Axe');
+INSERT INTO emoticharms.charm (id, pack_id, name, hero) VALUES (14, 5, 'sad', 'Death Prophet');
+INSERT INTO emoticharms.charm (id, pack_id, name, hero) VALUES (15, 5, 'sick', 'Pudge');
+INSERT INTO emoticharms.charm (id, pack_id, name, hero) VALUES (16, 6, 'sleeping', 'Keeper of the Light');
+INSERT INTO emoticharms.charm (id, pack_id, name, hero) VALUES (17, 6, 'surprise', 'Meepo');
+INSERT INTO emoticharms.charm (id, pack_id, name, hero) VALUES (18, 6, 'wink', 'Queen of Pain');
