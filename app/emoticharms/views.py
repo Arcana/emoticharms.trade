@@ -8,12 +8,10 @@ emoticharms = Blueprint("emoticharms", __name__, url_prefix="/emoticharms")
 @emoticharms.route('/')
 def index():
     packs = Pack.query.all()
-    charms = Charm.query.all()
-    raise NotImplementedError()
+    return render_template('emoticharms/index.html', packs=packs)
 
 
 @emoticharms.route('/manage')
 def manage():
     form = UserPacksForm()
-
     return render_template('emoticharms/manage.html', form=form)

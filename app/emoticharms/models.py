@@ -1,11 +1,13 @@
 from app import db
 
 
-user_packs = db.Table('user_packs',
-    db.Column('user_id', db.Integer, db.ForeignKey('users.account_id'), nullable=False),
-    db.Column('pack_id', db.Integer, db.ForeignKey('pack.id'), nullable=False),
-    db.Column('quantity', db.Integer, nullable=False, server_default="0"),
-)
+class UserPack(db.Model):
+    pack_id = db.Column(db.Integer, db.ForeignKey('pack.id'), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.account_id'), primary_key=True)
+    quantity = db.Column(db.Integer, default=0, nullable=False)
+
+    pack = db.relationship("Pack", backref="user_pack")
+    user = db.relationship("User", backref="user_pack")
 
 
 class Pack(db.Model):
@@ -13,8 +15,6 @@ class Pack(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(128))
     charms = db.relationship('Charm', backref=db.backref('pack', lazy="joined"), lazy="joined")
-    users = db.relationship('User', secondary=user_packs,
-        backref=db.backref('packs', lazy='dynamic'))
 
 
 class Charm(db.Model):

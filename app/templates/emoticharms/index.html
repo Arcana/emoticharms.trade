@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% for pack in packs %}
+        {{ pack.name }}
+        {% for charm in pack.charms %}
+            {{ charm.name }}
+            {{ charm.hero }}
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
