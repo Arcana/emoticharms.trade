@@ -97,14 +97,17 @@ def settings():
 @users.route('/check_ticket/')
 @login_required
 def check_ticket():
-    if datetime.datetime.utcnow() + datetime.timedelta(hours=2) > current_user.next_steam_check:
-        current_user.fetch_steam_info()
-        db.session.add(current_user)
-        db.session.commit()
-        if current_user.ti5_ticket:
-            flash('Success. Your ticket has been successfully validated. You now have full access to the site.', 'success')
+    if not current_user.ti5_ticket:
+        if datetime.datetime.utcnow() + datetime.timedelta(hours=2) > current_user.next_steam_check:
+            current_user.fetch_steam_info()
+            db.session.add(current_user)
+            db.session.commit()
+            if current_user.ti5_ticket:
+                flash('Success. Your ticket has been successfully validated. You now have full access to the site.', 'success')
+            else:
+                flash('Your ticket has not been validated. Please ensure that it is correctly linked.', 'danger')
         else:
-            flash('Your ticket has not been validated. Please ensure that it is correctly linked.', 'danger')
+            flash('Please wait a few more hours before rechecking.', 'danger')
     else:
-        flash('Please wait a few more hours before rechecking.', 'danger')
+        flash('Your account already has an International 2015 ticket associated.', 'success')
     return redirect(url_for('users.settings'))
