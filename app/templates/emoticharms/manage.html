@@ -3,7 +3,9 @@
     <form method=POST id="manage_form">
         {{ form.hidden_tag() }}
         {% for field in form %}
-            {{ field.label }}{{ field }}
+            {% if not loop.first %} {# skip CSFR field, which is guaranteed to always be first #}
+                <div>{{ field.label }} {{ field }}</div>
+            {% endif %}
         {% endfor %}
     </form>
 {% endblock %}
