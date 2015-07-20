@@ -8,7 +8,7 @@ Code behind emoticharms.trade to enable trading of Emoticharm packs at TI5
 virtualenv env
 source env/bin/activate
 pip install -r requirements.txt
-npm install
+npm install && npm install -g webpack
 webpack
 ```
 
