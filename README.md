@@ -5,19 +5,13 @@ Code behind emoticharms.trade to enable trading of Emoticharm packs at TI5
 ## Installation
 
 ```
-virtualenv env
-source env/bin/activate
 pip install -r requirements.txt
-npm install && npm install -g webpack
-webpack
+npm install && npm install -g webpack webpack-dev-server
 ```
 
 ## Usage
 
-### Development
-
 ```
-source env/bin/activate
-webpack --watch
+webpack-dev-server ./entry --hot --inline
 python manager.py runserver
 ```
