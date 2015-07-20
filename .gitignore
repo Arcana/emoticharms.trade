@@ -63,3 +63,4 @@ instance/*
 !instance/settings_example.py
 
 alembic.ini
+node_modules

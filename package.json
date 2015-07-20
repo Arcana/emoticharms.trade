@@ -1,0 +1,37 @@
+{
+  "name": "emoticharms.trade",
+  "version": "1.0.0",
+  "description": "Code behind emoticharms.trade to enable trading of Emoticharm packs at TI5",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arcana/emoticharms.trade.git"
+  },
+  "keywords": [
+    "dota",
+    "python",
+    "flask"
+  ],
+  "author": "Arcana.io",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/Arcana/emoticharms.trade/issues"
+  },
+  "homepage": "https://github.com/Arcana/emoticharms.trade#readme",
+  "dependencies": {
+    "bootstrap": "^3.3.5",
+    "bootstrap-webpack": "0.0.3",
+    "css-loader": "^0.15.5",
+    "file-loader": "^0.8.4",
+    "imports-loader": "^0.6.4",
+    "jquery": "^2.1.4",
+    "node-libs-browser": "^0.5.2",
+    "node-sass": "^3.2.0",
+    "sass-loader": "^1.0.2",
+    "style-loader": "^0.12.3",
+    "url-loader": "^0.5.6",
+    "webpack": "^1.10.1"
+  },
+  "devDependencies": {
+    "path": "^0.11.14"
+  }
+}

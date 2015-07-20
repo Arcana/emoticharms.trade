@@ -4,7 +4,7 @@ from flask.ext.login import LoginManager
 from flask.ext.openid import OpenID
 import steam
 
-app = Flask(__name__, instance_relative_config=True)
+app = Flask(__name__, instance_relative_config=True, static_folder='build')
 app.config.from_object('settings')
 app.config.from_pyfile('settings.py')
 
