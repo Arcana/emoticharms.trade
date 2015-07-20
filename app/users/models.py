@@ -87,7 +87,7 @@ class User(db.Model):
             self.avatar_small = steam_info.avatar_small
             self.avatar_medium = steam_info.avatar_medium
             self.avatar_large = steam_info.avatar_large
-            self.ti5_ticket = self.check_ti5_ticket_status()
+            self.ti5_ticket = self.check_ti5_ticket_status() if not self.ti5_ticket else self.ti5_ticket
             self.next_steam_check = datetime.datetime.utcnow() + datetime.timedelta(hours=4)
         except (HTTPError, HTTPTimeoutError):
             self.next_steam_check = datetime.datetime.utcnow() + datetime.timedelta(minutes=30)

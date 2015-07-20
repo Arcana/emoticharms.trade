@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
     <label>Email:</label><input type="text" />
-    <button class="btn btn-default">Re-check International 2015 ticket status</button>
+    {% if not current_user.ti5_ticket %}
+        <a class="btn btn-default" {{ 'disabled title="Please wait a few hours to re-check."' | safe if not show_button else 'href={url}'.format(url=url_for('users.check_ticket')) | safe  }}>Re-check International 2015 ticket status</a>
+    {% endif %}
 {% endblock %}

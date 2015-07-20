@@ -9,6 +9,11 @@ class UserPack(db.Model):
     pack = db.relationship("Pack", backref="user_pack")
     user = db.relationship("User", backref="user_pack")
 
+    def __init__(self, pack_id, user_id, quantity):
+        self.pack_id = pack_id
+        self.user_id = user_id
+        self.quantity = quantity
+
 
 class Pack(db.Model):
     """ It's a pack mate. It contains 3 charms. """
