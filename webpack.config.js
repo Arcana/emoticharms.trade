@@ -1,6 +1,7 @@
 'use strict';
 
 var path = require('path');
+var bourbon = require('node-bourbon').includePaths;
 
 module.exports = {
     cache: true,
@@ -12,7 +13,7 @@ module.exports = {
     module: {
         loaders: [
             { test: /bootstrap\/js\//, loader: 'imports?jQuery=jquery' },
-            { test: /\.sass$/, loader: "style!css!sass" },
+            { test: /\.s(a|c)ss$/, loader: "style!css!sass?indentedSyntax&includePaths[]=" + bourbon },
             { test: /\.woff2?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
             { test: /\.ttf$/, loader: "file" },
             { test: /\.eot$/, loader: "file" },

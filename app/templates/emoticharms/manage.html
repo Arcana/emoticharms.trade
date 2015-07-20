@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-    <form method=POST id="manage_form">
+    <form method="POST" class="manage-form">
         {{ form.hidden_tag() }}
         {% for field in form %}
             {% if not loop.first %} {# skip CSFR field, which is guaranteed to always be first #}
