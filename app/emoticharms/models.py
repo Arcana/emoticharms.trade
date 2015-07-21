@@ -21,6 +21,10 @@ class Pack(db.Model):
     name = db.Column(db.String(128))
     charms = db.relationship('Charm', backref=db.backref('pack', lazy="joined"), lazy="joined")
 
+    @property
+    def normalized_name(self):
+        return self.name.lower().strip()
+
 
 class Charm(db.Model):
     """ It's a charm mate. Packs contain 3 of them. """

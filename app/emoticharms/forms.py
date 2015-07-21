@@ -29,8 +29,8 @@ class QuantityInput(Input):
 class PackQuantityField(IntegerField):
 
     def __init__(self, pack, *args, **kwargs):
-        if pack is None:
-            raise RuntimeError('pack is a required parameter')
+        assert isinstance(pack, Pack)
+        self.pack = pack
         self.widget = QuantityInput(pack)
         super(PackQuantityField, self).__init__(*args, **kwargs)
 
@@ -40,10 +40,9 @@ class UserPacksFormMeta(type):
     def __new__(cls, name, parents, dct):
         packs = Pack.query.options(joinedload('charms')).all()
         for pack in packs:
-            normalized_name = pack.name.lower().strip()
-            dct[normalized_name] = PackQuantityField(
+            dct[pack.normalized_name] = PackQuantityField(
                 pack,
-                normalized_name,
+                pack.normalized_name,
                 default=0,
                 validators=[DataRequired(), NumberRange(min=0)],
             )
