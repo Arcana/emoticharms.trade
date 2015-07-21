@@ -3,7 +3,7 @@ from flask_wtf import Form
 from sqlalchemy.orm import joinedload
 from wtforms import IntegerField
 from wtforms.form import FormMeta
-from wtforms.validators import DataRequired, NumberRange
+from wtforms.validators import InputRequired, NumberRange
 from wtforms.widgets import Input
 
 
@@ -44,7 +44,7 @@ class UserPacksFormMeta(type):
                 pack,
                 pack.normalized_name,
                 default=0,
-                validators=[DataRequired(), NumberRange(min=0)],
+                validators=[InputRequired(), NumberRange(min=0)],
             )
         return super(UserPacksFormMeta, cls).__new__(cls, name, parents, dct)
 
