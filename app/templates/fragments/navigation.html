@@ -3,12 +3,7 @@
         <ul class="nav navbar-nav navbar-left">
             <li><a href="{{ url_for('index') }}">Home</a></li>
             {% if current_user.is_authenticated() %}
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Emoticharms <span class="caret"></span></a>
-                    <ul class="dropdown-menu dropdown-menu-large row">
-                        <li><a href="{{ url_for('emoticharms.manage') }}">Manage emoticharms</a></li>
-                        <li><a href="{{ url_for('emoticharms.index') }}">View matches</a></li>
-                    </ul>
-                </li>
+                <li><a href="{{ url_for('emoticharms.stickerbook') }}">Stickerbook</a></li>
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">{{ current_user.name }} <span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-large row">
                         <li><a href="{{ url_for('users.settings') }}">Settings</a></li>

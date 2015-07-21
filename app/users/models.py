@@ -95,7 +95,6 @@ class User(db.Model):
     def check_ti5_ticket_status(self):  # This API call is secured, so don't try it!
         status = steam.api.interface("IDOTA2Ticket_570").SteamAccountValidForEvent(EventID=1, SteamID=self.steam_id)\
             .get("result")
-        print bool(status)
         return bool(status.get("value"))
 
     @property
