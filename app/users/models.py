@@ -2,6 +2,7 @@ from app import db, steam
 from steam.api import HTTPError, HTTPTimeoutError
 from flask.ext.login import AnonymousUserMixin
 import datetime
+from app.emoticharms.models import UserPack
 
 
 class AnonymousUser(AnonymousUserMixin):
@@ -105,3 +106,11 @@ class User(db.Model):
     @property
     def perma_profile_url(self):
         return "http://steamcommunity.com/profiles/{}".format(self.steam_id)
+
+    @property
+    def spare_packs(self):
+        return UserPack.query.filter(UserPack.user_id == self.account_id, UserPack.quantity > 1).all()
+
+    @property
+    def wanted_packs(self):
+        return UserPack.query.filter(UserPack.user_id == self.account_id, UserPack.quantity == 0).all()

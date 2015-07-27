@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>Wanted packs</h1>
+    <ul>
+        {% for user_pack in wanted_packs %}
+            <li>{{ user_pack.pack.name }} (quantity: {{ user_pack.quantity }})</li>
+        {% endfor %}
+    </ul>
+
+    <h1>Spare packs</h1>
+    <ul>
+        {% for user_pack in spare_packs %}
+            <li>{{ user_pack.pack.name }} (quantity: {{ user_pack.quantity }})</li>
+        {% endfor %}
+    </ul>
+
+    <h1>Matches</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>User ID</th>
+            <th>Packs THEY spare to trade to you</th>
+            <th>Packs YOU want from you</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for match in matches %}
+            <tr>
+                <td>{{ match['user'].name }}</td>
+                <td>{{ match['other_user_has_spare_count'] }}</td>
+                <td>{{ match['other_user_wants_count'] }}</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <ul>
+                        {% for user_pack in match['user'].user_pack %}
+                            <li>
+                                {{ user_pack.pack.name }} (quantity: {{ user_pack.quantity }})
+
+                                {% if user_pack.quantity == 0 and user_pack.pack_id in current_user.spare_packs|map(attribute='pack_id') %}
+                                    <strong>They want, you have spare.</strong>
+                                {% elif  user_pack.quantity > 1 and user_pack.pack_id in current_user.wanted_packs|map(attribute='pack_id') %}
+                                    <strong>You want, they have spare</strong>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
