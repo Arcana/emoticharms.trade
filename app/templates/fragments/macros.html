@@ -1,0 +1,19 @@
+{%- macro form_field(field, placeholder, rows) -%}
+    <div class="form-row">
+        {{ field.label }}
+        <div class="input{{ " select" if field.type == "SelectField" }}{{ " error" if field.errors }}">
+            {% if field.description %}
+                <div class="description">{{ field.description | safe }}</div>
+            {% endif %}
+            {{ field(placeholder=placeholder, class="input-default", rows=rows if rows) }}
+            {{ field_errors(field) }}
+        </div>
+    </div>
+{%- endmacro -%}
+{%- macro field_errors(field) -%}
+    {%- if field.errors -%}
+        {%- for error in field.errors -%}
+            <div class="error">{{ error }}</div>
+        {%- endfor -%}
+    {%- endif -%}
+{%- endmacro -%}

@@ -8,25 +8,15 @@ from flask.ext.login import login_required, current_user
 emoticharms = Blueprint("emoticharms", __name__)
 
 
-@emoticharms.route('/collection')
+@emoticharms.route('/collection/', methods=['GET', 'POST'])
 @login_required
 @valid_ti5_ticket
 def collection():
-    form_data = {
-        user_pack.pack.normalized_name: user_pack.quantity
-        for user_pack in UserPack.query.filter_by(user=current_user).all()
-    }
-    form = UserPacksForm(data=form_data)
 
-    return render_template('emoticharms/collection.html', form=form)
+    form = UserPacksForm()
 
-
-@emoticharms.route('/collection', methods=['POST'])
-@login_required
-@valid_ti5_ticket
-def update_collection():
-    form = UserPacksForm(request.form)
-    if form.validate():
+    if form.validate_on_submit():
+        print 'submitted'
         for field in form:
             if not isinstance(field, PackQuantityField):
                 continue
@@ -38,4 +28,11 @@ def update_collection():
                 user_pack.quantity = field.data
             db.session.commit()
 
-    return redirect(url_for('emoticharms.collection'))
+    form_data = {
+        user_pack.pack.normalized_name: user_pack.quantity
+        for user_pack in UserPack.query.filter_by(user=current_user).all()
+        }
+    print form_data
+    form = UserPacksForm(data=form_data)
+
+    return render_template('emoticharms/collection.html', form=form)

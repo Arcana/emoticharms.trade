@@ -1,6 +1,11 @@
 {% extends "layout.html" %}
+{% from "fragments/macros.html" import form_field, form_errors %}
 {% block content %}
-    <label>Email:</label><input type="text" />
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form_field(form.email) }}
+        <div class="form-row offset">{{ form.submit(class="input-default") }}</div>
+    </form>
     {% if not current_user.ti5_ticket %}
         <a class="btn btn-default" {{ 'disabled title="Please wait a few hours to re-check."' | safe if not show_button else 'href={url}'.format(url=url_for('users.check_ticket')) | safe  }}>Re-check International 2015 ticket status</a>
     {% endif %}

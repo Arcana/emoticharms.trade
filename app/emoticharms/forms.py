@@ -42,7 +42,6 @@ class UserPacksFormMeta(type):
         for pack in packs:
             dct[pack.normalized_name] = PackQuantityField(
                 pack,
-                pack.normalized_name,
                 default=0,
                 validators=[InputRequired(), NumberRange(min=0)],
             )

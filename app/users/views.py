@@ -4,6 +4,7 @@ from app import oid, db, login_manager
 from models import User, AnonymousUser
 from sqlalchemy.exc import IntegrityError
 import datetime
+from .forms import UserSettings
 
 
 users = Blueprint("users", __name__, url_prefix="/users")
@@ -85,13 +86,23 @@ def logout():
     return redirect(oid.get_next_url())
 
 
-@users.route('/settings/')
+@users.route('/settings/', methods=['GET', 'POST'])
 @login_required
 def settings():
     show_button = False
     if not current_user.ti5_ticket:
         show_button = datetime.datetime.utcnow() + datetime.timedelta(hours=2) > current_user.next_steam_check
-    return render_template('users/settings.html', show_button=show_button)
+    form = UserSettings()
+    if form.validate_on_submit():
+        print 'submit'
+        print current_user.email
+        print form.email.data
+        current_user.email = form.email.data
+        print current_user.email
+        db.session.add(current_user)
+        db.session.commit()
+    form.email.data = current_user.email
+    return render_template('users/settings.html', show_button=show_button, form=form)
 
 
 @users.route('/check_ticket/')

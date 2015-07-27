@@ -35,6 +35,7 @@ class User(db.Model):
     signed_in = db.Column(db.Boolean, default=True)
     ti5_ticket = db.Column(db.Boolean, default=False)
     enabled = db.Column(db.Boolean, default=True)
+    email = db.Column(db.String(256, collation="utf8_swedish_ci"))
 
     __mapper_args__ = {
         "order_by": [db.asc(joined)]
@@ -95,7 +96,7 @@ class User(db.Model):
     def check_ti5_ticket_status(self):  # This API call is secured, so don't try it!
         status = steam.api.interface("IDOTA2Ticket_570").SteamAccountValidForEvent(EventID=1, SteamID=self.steam_id)\
             .get("result")
-        return bool(status.get("value"))
+        return status.get("valid")
 
     @property
     def steam_id(self):
