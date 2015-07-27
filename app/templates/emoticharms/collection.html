@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
+    <p>Please enter the quantities of packs you currently own.</p>
+    <p>We will try to match you with users who have duplicate packs that you do not, and you have duplicate packs they do not.</p>
     <form method="POST" class="manage-form">
         {{ form.hidden_tag() }}
         {% for field in form %}
