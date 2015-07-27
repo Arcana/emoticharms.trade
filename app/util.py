@@ -1,4 +1,4 @@
-from flask import flash, abort
+from flask import flash, abort, render_template
 from flask.ext.login import current_user
 from functools import wraps
 
@@ -8,7 +8,6 @@ def valid_ti5_ticket(func):
     @wraps(func)
     def decorated_function(*args, **kwargs):
         if not current_user.ti5_ticket:
-            flash('Valid International 2015 ticket required.', 'danger')
-            return abort(403)
+            return render_template('errors/ticket_required.html'), 403
         return func(*args, **kwargs)
     return decorated_function
