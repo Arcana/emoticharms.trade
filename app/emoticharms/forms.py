@@ -23,7 +23,7 @@ class QuantityInput(Input):
 
     @property
     def image_tags(self):
-        return ''.join('<img class="charm" src="{0}"></img>'.format(charm.image_url) for charm in self.pack.charms)
+        return ''.join('<span class="charm"><img src="{0}"></img></span>'.format(charm.image_url) for charm in self.pack.charms)
 
 
 class PackQuantityField(IntegerField):
