@@ -22,6 +22,7 @@
             <th>User ID</th>
             <th>Packs THEY spare to trade to you</th>
             <th>Packs YOU want from you</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -30,6 +31,7 @@
                 <td>{{ match['user'].name }}</td>
                 <td>{{ match['other_user_has_spare_count'] }}</td>
                 <td>{{ match['other_user_wants_count'] }}</td>
+                <td><a class="btn btn-default" href="{{ url_for('.trade', trade_user_id=match['user'].account_id) }}">Create trade request</a></td>
             </tr>
             <tr>
                 <td colspan="3">

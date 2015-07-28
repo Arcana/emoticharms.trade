@@ -16,7 +16,8 @@ module.exports = {
             { test: /\.woff2?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
             { test: /\.ttf$/, loader: "file" },
             { test: /\.eot$/, loader: "file" },
-            { test: /\.svg$/, loader: "file" }
+            { test: /\.svg$/, loader: "file" },
+            { test: /\.png$/, loader: "file" }
         ]
     }
 };

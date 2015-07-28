@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Trade with {{ trade.get("target_user").name }}</h1>
+
+    <div>
+        Giving
+        {% for pack in trade.get("giving") %}
+            {{ pack.name }}
+        {% endfor %}
+    </div>
+    <div>
+        Receiving
+        {% for pack in trade.get("receiving") %}
+            {{ pack.name }}
+        {% endfor %}
+    </div>
+
+    Please confirm this trade, to send a request to {{ trade.get("target_user").name }}. They will recieve an email with your request.
+{% endblock %}

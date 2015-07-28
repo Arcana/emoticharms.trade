@@ -1,12 +1,12 @@
 from app import db
-from app.emoticharms.models import UserPack
-from flask import Blueprint, render_template, request, url_for, redirect
-from app.users.models import User
+from ..emoticharms.models import UserPack, Pack
+from flask import Blueprint, render_template, abort
 from forms import UserPacksForm, PackQuantityField
 from ..util import valid_ti5_ticket
 from flask.ext.login import login_required, current_user
+from ..users.models import User
 
-emoticharms = Blueprint("emoticharms", __name__)
+emoticharms = Blueprint("emoticharms", __name__, url_prefix="/emoticharms")
 
 
 @emoticharms.route('/collection/', methods=['GET', 'POST'])
@@ -38,7 +38,8 @@ def collection():
 
     return render_template('emoticharms/collection.html', form=form)
 
-@emoticharms.route('/collection/matches/')
+
+@emoticharms.route('/matches/')
 @login_required
 @valid_ti5_ticket
 def matches():
@@ -99,3 +100,32 @@ def matches():
                            wanted_packs=wanted_packs,
                            spare_packs=spare_packs,
                            matches=matches)
+
+
+@emoticharms.route('/trade/<int:trade_user_id>/')
+@login_required
+@valid_ti5_ticket
+def trade(trade_user_id):
+    if trade_user_id == current_user.account_id:
+        abort(404)
+    trade_user = User.query.get_or_404(trade_user_id)
+
+    w1 = UserPack.query.filter(UserPack.user_id == current_user.account_id, UserPack.quantity == 0)
+    w2 = UserPack.query.filter(UserPack.user_id == trade_user.account_id, UserPack.quantity > 1)
+
+    #h1
+    #h2
+
+    user1 = w1.intersect(w2).all()
+
+    print user1
+
+    #user2 =
+
+    trade = {
+        "target_user": trade_user,
+        "giving": [],
+        "receiving": [],
+    }
+
+    return render_template('emoticharms/trade.html', trade=trade)
