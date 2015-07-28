@@ -64,3 +64,4 @@ instance/*
 
 alembic.ini
 node_modules
+.ipynb_checkpoints
